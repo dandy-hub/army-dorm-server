@@ -16,6 +16,13 @@ class Room(SQLModel, table=True):
 
 
 class Dormitory(SQLModel, table=True):
+    id: int = Field(primary_key=True)
     gender: DormGender
     rooms: List[Room] = Relationship(back_populates="dorm")
+    base_id: int = Field(foreign_key=True)
+    base: "Base" = Relationship(back_populates="dorms")
 
+
+class Base(SQLModel, table=True):
+    id: int = Field(primary_key=True)
+    dorms: List[Dormitory] = Relationship(back_populates="base")
