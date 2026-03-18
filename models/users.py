@@ -1,12 +1,14 @@
+import datetime
 from typing import Optional
 from sqlmodel import Field, SQLModel, Relationship
+from uuid6 import UUID,uuid7
 
-from dormtypes.soldier_types import PhoneNumber, Rank, PermissionLevel
+from app_types.soldier_types import PhoneNumber, Rank, PermissionLevel
 from models.dorms import Room
 
 
 class User(SQLModel, table=True):
-    id: int = Field(primary_key=True)
+    id: UUID = Field(primary_key=True, default_factory=uuid7, index=True)
     first_name: str
     last_name: str
     phone_number: PhoneNumber
@@ -14,5 +16,5 @@ class User(SQLModel, table=True):
     unit_name: str
     occupation: str
     permissions_level: PermissionLevel
-    room_id: Optional[int] = Field(default=None, foreign_key=True)
+    room_id: Optional[int] = Field(default=None, foreign_key=True, nullable=True)
     rooms: Optional[Room] = Relationship(back_populates="soldiers")

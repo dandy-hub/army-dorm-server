@@ -12,17 +12,11 @@ PhoneNumber = Annotated[
 ]
 
 
-class DormGender(str, Enum):
-    MAN = "גברים"
-    WOMAN = "נשים"
-    MIXED = "מעורב לא עלינו רחמנא ליצלן"
-    SPECIALS = "להטבק"
-
-
-class PermissionLevel(str, Enum):
-    GOD = "הכל"
-    COMMANDER = "מפקד מגורים"
-    DORM_MANAGER = "אחראי מגורים"
+class PermissionLevel(int, Enum):
+    GOD = 1
+    COMMANDER = 2
+    DORM_MANAGER = 3
+    DORM_SOLDIER = 4
 
 
 class RankCategory(str, Enum):
